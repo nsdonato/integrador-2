@@ -5,4 +5,4 @@ let usuarios = [
     [3, "Ana", 15789456, "ana@gmail.com"]
 ];
 
-console.log(usuarios);
+console.table(usuarios); // Idem a console.log, la info se muestra como una tabla, queda más legible, nada mas.
