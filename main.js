@@ -13,47 +13,67 @@ let email = "";
 let id = usuarios.length;
 
 let repetirOperacion = "";
+let opcionDeBusqueda = "";
 
-let accion = prompt(`SELECCIONE UNA OPERACION
--------------------------
-[AGREGAR] un usuario
-[OBTENER] un usuario
-[LISTAR] todos los usuarios
-[MODIFICAR] un usuario
-[ELIMINAR] un usuario
-[SALIR] del programa`)
+for (let i = 0; i < 1; i++) {
+
+    let accion = prompt(`SELECCIONE UNA OPERACION
+    -------------------------
+    [AGREGAR] un usuario
+    [OBTENER] un usuario
+    [LISTAR] todos los usuarios
+    [MODIFICAR] un usuario
+    [ELIMINAR] un usuario
+    [SALIR] del programa`)
 
 
-if (accion === "AGREGAR") {
-    nombre = prompt("Ingrese el nombre del usuario");
-    telefono = prompt("Ingrese el teléfono del usuario");
-    email = prompt("Ingrese el email del usuario");
-};
+    for (let i = 0; repetirOperacion != "NO"; i++) {
 
-let datosNuevoUsuario = [id, nombre, Number(telefono), email]
+        if (accion === "AGREGAR") {
+            nombre = prompt("Ingrese el nombre del usuario");
+            telefono = prompt("Ingrese el teléfono del usuario");
+            email = prompt("Ingrese el email del usuario");
 
-console.log(datosNuevoUsuario)
+            let datosNuevoUsuario = [id, nombre, Number(telefono), email]
 
-let confirmacion = prompt(`Has ingresado los siguientes datos
+            console.log(datosNuevoUsuario)
 
-NOMBRE: ${nombre} 
-TELEFONO: ${telefono}
-EMAIL: ${email}
--------------------------
-¿Desea confirmar esta operacion?`)
+            let confirmacion = prompt(`
+            Has ingresado los siguientes datos:
 
-if (confirmacion === "SI") {
-    alert("Operación realizada exitosamente")
-    usuarios.push(datosNuevoUsuario)
+            NOMBRE: ${nombre} 
+            TELEFONO: ${telefono}
+            EMAIL: ${email}
+            -------------------------
+            ¿Desea confirmar esta operacion?`)
+
+            if (confirmacion === "SI") {
+                alert("Operación realizada exitosamente")
+                usuarios.push(datosNuevoUsuario)
+
+            }
+            else {
+                alert("La operación no se ha realizado")
+            }
+
+            console.table(usuarios)
+
+            repetirOperacion = prompt("¿Desea repetir la operación? (SI/NO)")
+        }
+
+        else if (accion === "OBTENER") {
+            opcionDeBusqueda = prompt(`
+            ----------------------------------
+            Seleccione una opcion de busqueda
+            ----------------------------------
+            ID
+            NOMBRE
+            TELEFONO
+            EMAIL`);
+        }
+
+    }
+
 
 }
-else {
-    alert("La operación no se ha realizado")
-}
-
-console.table(usuarios)
-
-repetirOperacion = prompt("¿Desea repetir la operación? (SI/NO)")
-
-
 
