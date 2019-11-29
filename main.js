@@ -44,19 +44,22 @@ while (accion.toUpperCase() !== "SALIR") {
         } else {
             let primerLetraMayus = nombre.charAt(0).toUpperCase();
             let restoNombreMin = nombre.slice(1, nombre.length);
+            let nombreFormateado = primerLetraMayus + restoNombreMin;
 
-            let datosNuevoUsuario = [id, primerLetraMayus + restoNombreMin, Number(telefono), email.toLowerCase()];
+            let datosNuevoUsuario = [id, nombreFormateado, Number(telefono), email.toLowerCase()];
 
             console.log(datosNuevoUsuario);
 
             let confirmacion = prompt(`
                 Has ingresado los siguientes datos:
     
-                NOMBRE: ${nombre} 
+                NOMBRE: ${nombreFormateado} 
                 TELEFONO: ${telefono}
                 EMAIL: ${email}
                 -------------------------;
-                ¿Desea confirmar esta operacion? (SI/NO)`).toUpperCase();
+                ¿Desea confirmar esta operacion? 
+                SI
+                NO`).toUpperCase();
 
             if (confirmacion === "SI") {
 
@@ -66,7 +69,9 @@ while (accion.toUpperCase() !== "SALIR") {
                 // Actualizamos el indice, así sirve para el proximo usuario, sino se repetían.
                 id = usuarios.length;
 
-                confirmacion = prompt("¿Desea repetir la operación? (SI/NO)").toUpperCase();
+                confirmacion = prompt(`¿Desea repetir la operación? 
+                    SI
+                    NO`).toUpperCase();
 
                 if (confirmacion === "NO") {
                     accion = "";
@@ -92,7 +97,69 @@ while (accion.toUpperCase() !== "SALIR") {
 
     } else if (accion === "MODIFICAR") {
 
-        // Noe
+        let idAMmodificar = Number(prompt(`Ingrese el id del usuario a modificar`));
+
+        // Empiezo a recorrer el primer array, que tiene toda la info
+        for (let i = 0; i < usuarios.length; i++) {
+
+            // Empiezo a recorrer la info dentro del primer array, de izq a derecha (indice, nombre, telefono, mail)
+            for (let j = 0; j < usuarios[i].length; j++) {
+
+                if (usuarios[i][j] === idAMmodificar) {
+
+                    let nombreNuevo = prompt("Ingrese el nuevo nombre del usuario");
+                    let telefonoNuevo = prompt("Ingrese el nuevo teléfono del usuario");
+                    let emailNuevo = prompt("Ingrese el nuevo email del usuario");
+
+                    // Verifico que el usuario haya ingresado todos los datos nuevos para el usuario, sino vamos a quedarnos con información inconsistente.
+                    if (nombreNuevo == "" || telefonoNuevo == "" || emailNuevo == "") {
+
+                        alert(`Uno o mas datos del nuevo usuario está/n vacios, por favor vuelva a ingresarlos`);
+
+                    } else {
+                        let primerLetraMayus = nombreNuevo.charAt(0).toUpperCase();
+                        let restoNombreMin = nombreNuevo.slice(1, nombreNuevo.length);
+                        let nombreNuevoFormateado = primerLetraMayus + restoNombreMin;
+
+                        let datosUsuarioModificado = [idAMmodificar, nombreNuevoFormateado, Number(telefonoNuevo), emailNuevo.toLowerCase()];
+
+                        console.log(datosUsuarioModificado);
+
+                        let confirmacion = prompt(`
+                            Has ingresado los siguientes datos:
+                
+                            NOMBRE: ${nombreNuevoFormateado} 
+                            TELEFONO: ${telefonoNuevo}
+                            EMAIL: ${emailNuevo}
+                            -----------------------------------
+                            ¿Desea confirmar esta operacion? 
+                            SI
+                            NO`).toUpperCase();
+
+                        if (confirmacion === "SI") {
+
+                            alert("Operación realizada exitosamente");
+                            usuarios[i] = datosUsuarioModificado;
+                            console.table(usuarios);
+
+                            confirmacion = prompt(`¿Desea repetir la operación? 
+                            SI
+                            NO`).toUpperCase();
+
+                            if (confirmacion === "NO") {
+                                accion = "";
+                            } else if (confirmacion !== "SI") {
+                                //  Si escribió cualquier cosa le indicamos que no es una opción valida.
+                                alert(`Opción inválida`);
+                            }
+
+                        } else {
+                            alert("La operación no se ha realizado");
+                        }
+                    }
+                }
+            }
+        }
 
     } else {
 
