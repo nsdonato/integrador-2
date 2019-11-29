@@ -96,10 +96,9 @@ while (accion.toUpperCase() !== "SALIR") {
 
     } else {
 
-        // Si le pifió al salir y escribió cualquier cosa:
+        // Pudo haber escrito salir, verificamos primero si es diferente de salir, para avisarle que deje la michelada
         if (accion !== "SALIR") {
 
-            //  Si escribió cualquier cosa le indicamos que no es una opción valida.
             alert(`
             Opción inválida
             Por favor, ingrese una opción correcta`);
@@ -119,13 +118,13 @@ while (accion.toUpperCase() !== "SALIR") {
 
             } else if (confirmacion !== "NO") {
 
-                // Si le pifió al SI o NO, le indicamos que es una opción invalida y que vuelva a ingresar que quiere hacer.
+                // Si le pifió al SI o NO cuando quiso confirmarque VERDADERAMENTE quería salir (o no), le indicamos que es una opción invalida y que vuelva a ingresar que quiere hacer.
 
                 alert(`
                 Opción inválida
                 Por favor, ingrese una opción correcta`);
 
-                accion = ""; // Si no blanqueamos la acción, al ser SALIR, el while verifica que es no es !== SALIR y finaliza.
+                accion = ""; // Si no blanqueamos la acción, como en este momento es igual a SALIR, el while verifica que es no es difrente de SALIR y finaliza la operación.
 
             } else {
                 /* Si escribió NO, significa que no quiere salir y que quiere seguir usando la "aplicación", por eso tenemos que blanquear la acción.
