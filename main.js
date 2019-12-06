@@ -98,11 +98,6 @@ while (accion.toUpperCase() !== "SALIR") {
     }
     else if (accion === "OBTENER") {
 
-
-    }
-
-    else if (accion === "OBTENER") {
-
         let opcionDeBusqueda = prompt(`
             ----------------------------------
             Seleccione una opcion de busqueda
