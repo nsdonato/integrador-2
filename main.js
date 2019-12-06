@@ -1,8 +1,8 @@
 let usuarios = [
-    [0, "Carla", 1545628984, "carla@gmail.com"],
-    [1, "Pedro", 1545251245, "pedro@gmail.com"],
-    [2, "Lucas", 1523357849, "lucas@gmail.com"],
-    [3, "Ana", 15789456, "ana@gmail.com"]
+    ["0", "Carla", "1545628984", "carla@gmail.com"],
+    ["1", "Pedro", "1545251245", "pedro@gmail.com"],
+    ["2", "Lucas", "1523357849", "lucas@gmail.com"],
+    ["3", "Ana", "15789456", "ana@gmail.com"]
 ];
 
 console.table(usuarios); // Idem a console.log, la info se muestra como una tabla, queda más legible, nada mas.
@@ -10,7 +10,6 @@ console.table(usuarios); // Idem a console.log, la info se muestra como una tabl
 let nombre = "";
 let telefono = "";
 let email = "";
-let opcionDeBusqueda = "";
 let accion = "";
 
 let id = usuarios.length;
@@ -99,7 +98,12 @@ while (accion.toUpperCase() !== "SALIR") {
     }
     else if (accion === "OBTENER") {
 
-        opcionDeBusqueda = prompt(`
+
+    }
+
+    else if (accion === "OBTENER") {
+
+        let opcionDeBusqueda = prompt(`
             ----------------------------------
             Seleccione una opcion de busqueda
             ----------------------------------
@@ -108,9 +112,45 @@ while (accion.toUpperCase() !== "SALIR") {
             TELEFONO
             EMAIL`).toUpperCase();
 
-    } else if (accion === "MODIFICAR") {
+        if (opcionDeBusqueda == "ID" || opcionDeBusqueda == "NOMBRE" || opcionDeBusqueda == "TELEFONO" || opcionDeBusqueda == "EMAIL") {
+            let ValorABuscar = prompt(`Ingrese el valor de ${opcionDeBusqueda} a buscar`)
+            ValorABuscar.toLowerCase()
+            let primerLetraMayus = ValorABuscar.charAt(0).toUpperCase();
+            let restoNombreMin = ValorABuscar.slice(1, ValorABuscar.length);
+            ValorABuscar = primerLetraMayus + restoNombreMin;
 
-        let idAMmodificar = Number(prompt(`Ingrese el id del usuario a modificar`));
+            for (let i = 0; i < usuarios.length; i++) {
+                for (let j = 0; j < usuarios[i].length; j++) {
+
+                    if (usuarios[i][j] === ValorABuscar) {
+                        alert(`ID: ${usuarios[i][0]}
+NOMBRE: ${usuarios[i][1]}
+TELEFONO: ${usuarios[i][2]}
+EMAIL: ${usuarios[i][3]}`)
+
+
+                    }
+
+                }
+            }
+            let confirmacion = prompt(`¿Desea repetir la operación? 
+                SI
+                NO`).toUpperCase();
+
+            if (confirmacion === "NO") {
+                accion = "";
+            } else if (confirmacion != "SI") {
+                alert(`Opción inválida`);
+            }
+
+        }
+
+    }
+
+
+    else if (accion === "MODIFICAR") {
+
+        let idAMmodificar = prompt(`Ingrese el id del usuario a modificar`);
 
         // Empiezo a recorrer el primer array, que tiene toda la info
         for (let i = 0; i < usuarios.length; i++) {
@@ -174,7 +214,9 @@ while (accion.toUpperCase() !== "SALIR") {
             }
         }
 
-    } else {
+    }
+
+    else {
 
         // Pudo haber escrito salir, verificamos primero si es diferente de salir, para avisarle que deje la michelada
         if (accion !== "SALIR") {
