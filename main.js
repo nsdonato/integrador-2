@@ -84,7 +84,20 @@ while (accion.toUpperCase() !== "SALIR") {
                 alert("La operación no se ha realizado");
             }
         }
-    } else if (accion === "OBTENER") {
+    } else if (accion === "LISTAR") {
+        let cadena = "";
+        for (let i = 0; i < usuarios.length; i++) {
+            cadena += `
+                       ID: ${usuarios[i][0]} 
+                       NOMBRE: ${usuarios[i][1]};
+                       ----------------------
+                       `;
+        }
+
+        alert(cadena);
+        accion = "";
+    }
+    else if (accion === "OBTENER") {
 
         opcionDeBusqueda = prompt(`
             ----------------------------------
