@@ -15,30 +15,35 @@ let accion = "";
 let id = usuarios.length;
 
 while (accion.toUpperCase() !== "SALIR") {
-
+    debugger;
     // Verifico si esta vacio, ya que si es la primera vez, le tiene que preguntar que quiere hacer,
     // sino, significa que esta repitiendo alguna acción.
     if (accion === "") {
-        accion = prompt(`SELECCIONE UNA OPERACION
-        -------------------------
-        [AGREGAR] un usuario
-        [OBTENER] un usuario
-        [LISTAR] todos los usuarios
-        [MODIFICAR] un usuario
-        [ELIMINAR] un usuario
-        [SALIR] del programa`).toUpperCase();
+        // Esto queda horrible acá, pero visualmente esta bien centrado!
+        accion = prompt(` --------------------------------------------
+⚙️ SELECCIONE UNA OPERACIÓN
+--------------------------------------------
+➡️ [AGREGAR] un usuario 👤
+➡️ [OBTENER] un usuario 🔎
+➡️ [LISTAR] todos los usuarios 📄
+➡️ [MODIFICAR] un usuario ✏️
+➡️ [ELIMINAR] un usuario 🗑️
+➡️ [SALIR] del programa 🚪`)
+        if (accion != null && accion != "") {
+            accion.toUpperCase();
+        }
     }
 
     if (accion === "AGREGAR") {
 
-        nombre = prompt("Ingrese el nombre del usuario");
-        telefono = prompt("Ingrese el teléfono del usuario");
-        email = prompt("Ingrese el email del usuario");
+        nombre = prompt("👤 Ingrese el nombre del usuario");
+        telefono = prompt("☎️ Ingrese el teléfono del usuario");
+        email = prompt("📧 Ingrese el email del usuario");
 
         // Verifico que el usuario haya ingresado todos los datos, sino vamos a quedarnos con información inconsistente.
-        if (nombre == "" || telefono == "" || email == "") {
+        if (nombre == "" || telefono == "" || email == "" || nombre == null || telefono == null || email == null) {
 
-            alert(`Uno o mas datos del nuevo usuario está/n vacios, por favor vuelva a ingresarlos`);
+            alert(`⚠️ Uno o mas datos del nuevo usuario está/n vacios, por favor vuelva a ingresarlos`);
 
         } else {
             let primerLetraMayus = nombre.charAt(0).toUpperCase();
@@ -50,45 +55,46 @@ while (accion.toUpperCase() !== "SALIR") {
             console.log(datosNuevoUsuario);
 
             let confirmacion = prompt(`
-                Has ingresado los siguientes datos:
-    
-                NOMBRE: ${nombreFormateado} 
-                TELEFONO: ${telefono}
-                EMAIL: ${email}
-                -------------------------;
-                ¿Desea confirmar esta operacion? 
-                SI
-                NO`).toUpperCase();
+🗃️ Has ingresado los siguientes datos:
 
-            if (confirmacion === "SI") {
+👤 NOMBRE: ${nombreFormateado} 
+☎️ TELEFONO: ${telefono}
+📧 EMAIL: ${email}
+----------------------------------------------
+⚠️ ¿Desea confirmar esta operacion? 
 
-                alert("Operación realizada exitosamente");
+✅ SI
+❌ NO`).toUpperCase();
+
+            if (confirmacion.toUpperCase() === "SI") {
+
+                alert("✅ Operación realizada exitosamente");
                 usuarios.push(datosNuevoUsuario);
                 console.table(usuarios);
                 // Actualizamos el indice, así sirve para el proximo usuario, sino se repetían.
                 id = usuarios.length;
 
-                confirmacion = prompt(`¿Desea repetir la operación? 
-                    SI
-                    NO`).toUpperCase();
+                confirmacion = prompt(`🔄 ¿Desea repetir la operación? (SI/NO)`).toUpperCase();
 
                 if (confirmacion === "NO") {
                     accion = "";
                 } else if (confirmacion !== "SI") {
                     //  Si escribió cualquier cosa le indicamos que no es una opción valida.
-                    alert(`Opción inválida`);
+                    alert(`
+                    🚫 Opción inválida
+                    🙏 Por favor, ingresar una opción correcta`);
                 }
-
             } else {
-                alert("La operación no se ha realizado");
+                alert("❌ La operación no se ha realizado");
+                accion = "";
             }
         }
     } else if (accion === "LISTAR") {
         let cadena = "";
         for (let i = 0; i < usuarios.length; i++) {
             cadena += `
-                       ID: ${usuarios[i][0]} 
-                       NOMBRE: ${usuarios[i][1]};
+                       🆔 ID: ${usuarios[i][0]} 
+                       👤 NOMBRE: ${usuarios[i][1]};
                        ----------------------
                        `;
         }
@@ -98,17 +104,16 @@ while (accion.toUpperCase() !== "SALIR") {
     }
     else if (accion === "OBTENER") {
 
-        let opcionDeBusqueda = prompt(`
-            ----------------------------------
-            Seleccione una opcion de busqueda
-            ----------------------------------
-            ID
-            NOMBRE
-            TELEFONO
-            EMAIL`).toUpperCase();
+        let opcionDeBusqueda = prompt(`---------------------------------------------
+🔎 Seleccione una opcion de búsqueda
+---------------------------------------------
+🆔 ID
+👤 NOMBRE
+☎️ ELEFONO
+📧 EMAIL`).toUpperCase();
 
         if (opcionDeBusqueda == "ID" || opcionDeBusqueda == "NOMBRE" || opcionDeBusqueda == "TELEFONO" || opcionDeBusqueda == "EMAIL") {
-            let ValorABuscar = prompt(`Ingrese el valor de ${opcionDeBusqueda} a buscar`)
+            let ValorABuscar = prompt(`📝 Ingrese el valor de ${opcionDeBusqueda} a buscar`)
             ValorABuscar.toLowerCase()
             let primerLetraMayus = ValorABuscar.charAt(0).toUpperCase();
             let restoNombreMin = ValorABuscar.slice(1, ValorABuscar.length);
@@ -118,34 +123,28 @@ while (accion.toUpperCase() !== "SALIR") {
                 for (let j = 0; j < usuarios[i].length; j++) {
 
                     if (usuarios[i][j] === ValorABuscar) {
-                        alert(`ID: ${usuarios[i][0]}
-NOMBRE: ${usuarios[i][1]}
-TELEFONO: ${usuarios[i][2]}
-EMAIL: ${usuarios[i][3]}`)
-
-
+                        alert(`
+                        🆔 ID: ${usuarios[i][0]}
+                        👤 NOMBRE: ${usuarios[i][1]}
+                        ☎️ TELEFONO: ${usuarios[i][2]}
+                        📧 EMAIL: ${usuarios[i][3]}`)
                     }
-
                 }
             }
-            let confirmacion = prompt(`¿Desea repetir la operación? 
-                SI
-                NO`).toUpperCase();
+            let confirmacion = prompt(`🔄 ¿Desea repetir la operación? (SI/NO)`).toUpperCase();
 
             if (confirmacion === "NO") {
                 accion = "";
             } else if (confirmacion != "SI") {
-                alert(`Opción inválida`);
+                alert(`
+                🚫 Opción inválida
+                🙏 Por favor, ingrsar una operación correcta`);
             }
-
         }
-
     }
-
-
     else if (accion === "MODIFICAR") {
 
-        let idAMmodificar = prompt(`Ingrese el id del usuario a modificar`);
+        let idAMmodificar = prompt(`📝 Ingrese el id del usuario a modificar`);
 
         // Empiezo a recorrer el primer array, que tiene toda la info
         for (let i = 0; i < usuarios.length; i++) {
@@ -155,14 +154,14 @@ EMAIL: ${usuarios[i][3]}`)
 
                 if (usuarios[i][j] === idAMmodificar) {
 
-                    let nombreNuevo = prompt("Ingrese el nuevo nombre del usuario");
-                    let telefonoNuevo = prompt("Ingrese el nuevo teléfono del usuario");
-                    let emailNuevo = prompt("Ingrese el nuevo email del usuario");
+                    let nombreNuevo = prompt("👤 Ingrese el nuevo nombre del usuario");
+                    let telefonoNuevo = prompt("☎️ Ingrese el nuevo teléfono del usuario");
+                    let emailNuevo = prompt("📧 Ingrese el nuevo email del usuario");
 
                     // Verifico que el usuario haya ingresado todos los datos nuevos para el usuario, sino vamos a quedarnos con información inconsistente.
                     if (nombreNuevo == "" || telefonoNuevo == "" || emailNuevo == "") {
 
-                        alert(`Uno o mas datos del nuevo usuario está/n vacios, por favor vuelva a ingresarlos`);
+                        alert(`⚠️ Uno o mas datos del nuevo usuario está/n vacios, por favor vuelva a ingresarlos`);
 
                     } else {
                         let primerLetraMayus = nombreNuevo.charAt(0).toUpperCase();
@@ -174,78 +173,79 @@ EMAIL: ${usuarios[i][3]}`)
                         console.log(datosUsuarioModificado);
 
                         let confirmacion = prompt(`
-                            Has ingresado los siguientes datos:
+                            🗃️ Los nuevos datos del usuario son:
                 
-                            NOMBRE: ${nombreNuevoFormateado} 
-                            TELEFONO: ${telefonoNuevo}
-                            EMAIL: ${emailNuevo}
+                            👤 NOMBRE: ${nombreNuevoFormateado} 
+                            ☎️ TELEFONO: ${telefonoNuevo}
+                            📧 EMAIL: ${emailNuevo}
                             -----------------------------------
-                            ¿Desea confirmar esta operacion? 
-                            SI
-                            NO`).toUpperCase();
+                            ⚠️ ¿Desea confirmar esta operacion? 
+                            ✅ SI
+                            ❌ NO`).toUpperCase();
 
                         if (confirmacion === "SI") {
 
-                            alert("Operación realizada exitosamente");
+                            alert("✅ Operación realizada exitosamente");
                             usuarios[i] = datosUsuarioModificado;
                             console.table(usuarios);
 
-                            confirmacion = prompt(`¿Desea repetir la operación? 
-                            SI
-                            NO`).toUpperCase();
+                            let confirmacion = prompt(`🔄 ¿Desea repetir la operación? (SI/NO)`).toUpperCase();
 
                             if (confirmacion === "NO") {
                                 accion = "";
                             } else if (confirmacion !== "SI") {
                                 //  Si escribió cualquier cosa le indicamos que no es una opción valida.
-                                alert(`Opción inválida`);
+                                alert(`
+🚫 Opción inválida
+🙏 Por favor, ingresar una operación correcta`);
                             }
 
                         } else {
-                            alert("La operación no se ha realizado");
+                            alert("❌ La operación no se ha realizado");
                         }
                     }
+                } else {
+                    alert(`😞 Usuario no encontrado`);
                 }
             }
         }
-
     }
-
     else {
 
         // Pudo haber escrito salir, verificamos primero si es diferente de salir, para avisarle que deje la michelada
-        if (accion !== "SALIR") {
+        if (accion !== "SALIR" || accion == "" || accion == null) {
 
             alert(`
-            Opción inválida
-            Por favor, ingrese una opción correcta`);
+🚫 Opción inválida
+🙏 Por favor, ingrese una opción correcta`);
             accion = "";
 
         } else {
 
             // Si escribió SALIR, verificamos que realmente quiera salir.            
             let confirmacion = prompt(`
-                ¿Desea confirmar esta operación?
-                SI
-                NO`).toUpperCase();
+⚠️ ¿Desea confirmar esta operación?
+✅ SI
+❌ NO`).toUpperCase();
 
             if (confirmacion === "SI") {
 
-                alert("Hasta pronto");
+                alert("👋 Hasta pronto");
 
             } else if (confirmacion !== "NO") {
 
                 // Si le pifió al SI o NO cuando quiso confirmarque VERDADERAMENTE quería salir (o no), le indicamos que es una opción invalida y que vuelva a ingresar que quiere hacer.
-
                 alert(`
-                Opción inválida
-                Por favor, ingrese una opción correcta`);
+🚫 Opción inválida
+🙏 Por favor, ingrese una opción correcta`);
 
                 accion = ""; // Si no blanqueamos la acción, como en este momento es igual a SALIR, el while verifica que es no es difrente de SALIR y finaliza la operación.
 
-            } else {
+            } else if (confirmacion == "NO") {
                 /* Si escribió NO, significa que no quiere salir y que quiere seguir usando la "aplicación", por eso tenemos que blanquear la acción.
                 Si no blanqueamos la acción, al ser SALIR, el while verifica que es no es !== SALIR y finaliza.*/
+                accion = "";
+            } else {
                 accion = "";
             }
         }
