@@ -11,7 +11,6 @@ let nombre = "";
 let telefono = "";
 let email = "";
 let accion = "";
-
 let id = usuarios.length;
 
 while (accion.toUpperCase() !== "SALIR") {
@@ -19,14 +18,15 @@ while (accion.toUpperCase() !== "SALIR") {
     // Verifico si esta vacio, ya que si es la primera vez, le tiene que preguntar que quiere hacer,
     // sino, significa que esta repitiendo alguna acción.
     if (accion === "") {
-        accion = prompt(`SELECCIONE UNA OPERACION
-        -------------------------
-        [AGREGAR] un usuario
-        [OBTENER] un usuario
-        [LISTAR] todos los usuarios
-        [MODIFICAR] un usuario
-        [ELIMINAR] un usuario
-        [SALIR] del programa`).toUpperCase();
+        accion = prompt(`   ------------------------------------- 
+        SELECCIONE UNA OPERACION
+    -------------------------------------
+    [AGREGAR] un usuario
+    [OBTENER] un usuario
+    [LISTAR] todos los usuarios
+    [MODIFICAR] un usuario
+    [ELIMINAR] un usuario
+    [SALIR] del programa`).toUpperCase();
     }
 
     if (accion === "AGREGAR") {
@@ -106,17 +106,18 @@ while (accion.toUpperCase() !== "SALIR") {
             ValorABuscar = primerLetraMayus + restoNombreMin;
 
             for (let i = 0; i < usuarios.length; i++) {
+                let nombreEnElArray = usuarios[i][1];
+                let telefonoEnElArray = usuarios[i][2]
+                let emailEnElArray = usuarios[i][3]
                 for (let j = 0; j < usuarios[i].length; j++) {
 
                     if (usuarios[i][j] === ValorABuscar) {
                         alert(`ID: ${usuarios[i][0]}
-NOMBRE: ${usuarios[i][1]}
-TELEFONO: ${usuarios[i][2]}
-EMAIL: ${usuarios[i][3]}`)
-
+NOMBRE: ${nombreEnElArray}
+TELEFONO: ${telefonoEnElArray}
+EMAIL: ${emailEnElArray}`)
 
                     }
-
                 }
             }
             let confirmacion = prompt(`¿Desea repetir la operación? 
@@ -128,10 +129,22 @@ EMAIL: ${usuarios[i][3]}`)
             } else if (confirmacion != "SI") {
                 alert(`Opción inválida`);
             }
+        }
+    }
 
+
+    else if (accion === "LISTAR") {
+        let cadena = "";
+        for (let i = 0; i < usuarios.length; i++) {
+            cadena += `ID: ${usuarios[i][0]} 
+                       NOMBRE: ${usuarios[i][1]};
+                       ----------------------
+                       `;
         }
 
-    }
+        alert(cadena);
+        accion = ""; 
+    }    
 
 
     else if (accion === "MODIFICAR") {
@@ -155,7 +168,7 @@ EMAIL: ${usuarios[i][3]}`)
 
                         alert(`Uno o mas datos del nuevo usuario está/n vacios, por favor vuelva a ingresarlos`);
 
-                    } else {
+                    } else {    
                         let primerLetraMayus = nombreNuevo.charAt(0).toUpperCase();
                         let restoNombreMin = nombreNuevo.slice(1, nombreNuevo.length);
                         let nombreNuevoFormateado = primerLetraMayus + restoNombreMin;
@@ -167,14 +180,14 @@ EMAIL: ${usuarios[i][3]}`)
                         let confirmacion = prompt(`
                             Has ingresado los siguientes datos:
                 
-                            NOMBRE: ${nombreNuevoFormateado} 
-                            TELEFONO: ${telefonoNuevo}
-                            EMAIL: ${emailNuevo}
-                            -----------------------------------
-                            ¿Desea confirmar esta operacion? 
-                            SI
-                            NO`).toUpperCase();
-
+        NOMBRE: ${nombreNuevoFormateado} 
+            TELEFONO: ${telefonoNuevo}
+        EMAIL: ${e mailNuevo}  
+        ------------ ------------- ----------
+        ¿Desea co nfirmar es ta operacion? 
+        SI
+        NO`).toUpperCase();  
+            
                         if (confirmacion === "SI") {
 
                             alert("Operación realizada exitosamente");
@@ -183,8 +196,8 @@ EMAIL: ${usuarios[i][3]}`)
 
                             confirmacion = prompt(`¿Desea repetir la operación? 
                             SI
-                            NO`).toUpperCase();
-
+                            NO`).toUpperCase();  
+            
                             if (confirmacion === "NO") {
                                 accion = "";
                             } else if (confirmacion !== "SI") {
@@ -202,6 +215,32 @@ EMAIL: ${usuarios[i][3]}`)
 
     }
 
+    else if (accion === "ELIMINAR") {
+        let idUsuarioAEliminar = prompt("Ingrese el id del usuario a eliminar")
+        
+        for (let i = 0; i < usuarios.length; i++) {
+            for (let j = 0; j < usuarios[i].length; j++) {
+                if (idUsuarioAEliminar == usuarios[i][j]) {
+                    let confirmarOperacion = prompt(`Los datos del usuario seleccionado son:
+                    ID: ${usuarios[i][j]}
+                    NOMBRE: ${usuarios[i][j]}
+        TELEFO NO: ${usuarios [i][j]}
+        EMAIL: ${u suarios[i][j]} `)
+          
+        if (confi rmarOperacion  = == "SI") {
+                        alert(`OPERACION CONFIRMADA`)
+                    }
+                }
+                else {
+                    alert(`Usuario no encontrado`)
+                }
+
+            }
+
+        }
+
+    }
+
     else {
 
         // Pudo haber escrito salir, verificamos primero si es diferente de salir, para avisarle que deje la michelada
@@ -210,16 +249,16 @@ EMAIL: ${usuarios[i][3]}`)
             alert(`
             Opción inválida
             Por favor, ingrese una opción correcta`);
-            accion = "";
-
+        accion = "";
+        
         } else {
 
             // Si escribió SALIR, verificamos que realmente quiera salir.            
             let confirmacion = prompt(`
                 ¿Desea confirmar esta operación?
                 SI
-                NO`).toUpperCase();
-
+        NO`).toUpperCase();  
+            
             if (confirmacion === "SI") {
 
                 alert("Hasta pronto");
@@ -231,8 +270,8 @@ EMAIL: ${usuarios[i][3]}`)
                 alert(`
                 Opción inválida
                 Por favor, ingrese una opción correcta`);
-
-                accion = ""; // Si no blanqueamos la acción, como en este momento es igual a SALIR, el while verifica que es no es difrente de SALIR y finaliza la operación.
+        
+        accion = ""; // Si no blanqueamos la acción, como en este momento es igual a SALIR, el while verifica que es no es difrente de SALIR y finaliza la operación.
 
             } else {
                 /* Si escribió NO, significa que no quiere salir y que quiere seguir usando la "aplicación", por eso tenemos que blanquear la acción.
