@@ -14,7 +14,7 @@ let accion = "";
 let id = usuarios.length;
 
 while (accion.toUpperCase() !== "SALIR") {
-    debugger;
+    // debugger;
     // Verifico si esta vacio, ya que si es la primera vez, le tiene que preguntar que quiere hacer,
     // sino, significa que esta repitiendo alguna acción.
     if (accion === "") {
@@ -33,7 +33,7 @@ while (accion.toUpperCase() !== "SALIR") {
         }
     }
 
-    if (accion === "AGREGAR") {
+    if (accion.toUpperCase() === "AGREGAR") {
 
         nombre = prompt("👤 Ingrese el nombre del usuario");
         telefono = prompt("☎️ Ingrese el teléfono del usuario");
@@ -88,7 +88,10 @@ while (accion.toUpperCase() !== "SALIR") {
                 accion = "";
             }
         }
-    } else if (accion === "LISTAR") {
+
+    }
+
+    else if (accion.toUpperCase() === "LISTAR") {
         let cadena = "";
         for (let i = 0; i < usuarios.length; i++) {
             cadena += `
@@ -101,7 +104,8 @@ while (accion.toUpperCase() !== "SALIR") {
         alert(cadena);
         accion = "";
     }
-    else if (accion === "OBTENER") {
+
+    else if (accion.toUpperCase() === "OBTENER") {
 
         let opcionDeBusqueda = prompt(`---------------------------------------------
 🔎 Seleccione una opcion de búsqueda
@@ -142,9 +146,24 @@ while (accion.toUpperCase() !== "SALIR") {
         }
     }
 
-    else if (accion === "MODIFICAR") {
+    else if (accion.toUpperCase() === "LISTAR") {
+        let cadena = "";
+        for (let i = 0; i < usuarios.length; i++) {
+            cadena += `
+               🆔 ID: ${usuarios[i][0]} 
+               👤 NOMBRE: ${usuarios[i][1]};
+               ----------------------
+               `;
+        }
+
+        alert(cadena);
+        accion = "";
+    }
+
+    else if (accion.toUpperCase() === "MODIFICAR") {
 
         let idAMmodificar = prompt(`📝 Ingrese el id del usuario a modificar`);
+        let usuarioEncontrado = ""
 
         // Empiezo a recorrer el primer array, que tiene toda la info
         for (let i = 0; i < usuarios.length; i++) {
@@ -153,7 +172,8 @@ while (accion.toUpperCase() !== "SALIR") {
             for (let j = 0; j < usuarios[i].length; j++) {
 
                 if (usuarios[i][j] === idAMmodificar) {
-
+                    
+                    usuarioEncontrado = true;
                     let nombreNuevo = prompt("👤 Ingrese el nuevo nombre del usuario");
                     let telefonoNuevo = prompt("☎️ Ingrese el nuevo teléfono del usuario");
                     let emailNuevo = prompt("📧 Ingrese el nuevo email del usuario");
@@ -204,19 +224,25 @@ while (accion.toUpperCase() !== "SALIR") {
                             alert("❌ La operación no se ha realizado");
                         }
                     }
-                } 
-                // else {
-                //     alert(`😞 Usuario no encontrado`);
-                // }
+                }
             }
         }
+        if (usuarioEncontrado == false) {
+            alert(`😞 Usuario no encontrado`);
+        }  
     }
 
-    else if (accion === "ELIMINAR") {
+    else if (accion.toUpperCase() === "ELIMINAR") {
+
         let idUsuarioAEliminar = prompt("📝 Ingrese el id del usuario a eliminar")
+        let usuarioEncontrado = ""
+
         for (let i = 0; i < usuarios.length; i++) {
             for (let j = 0; j < usuarios[i].length; j++) {
+
                 if (idUsuarioAEliminar === usuarios[i][j]) {
+
+                    usuarioEncontrado = true;
                     let confirmacion = prompt(`
                     🗃️ Los datos del usuario seleccionado son:
                     👤 NOMBRE: ${usuarios[i][1]} 
@@ -226,18 +252,23 @@ while (accion.toUpperCase() !== "SALIR") {
                     ⚠️ ¿Desea confirmar esta operacion? 
                     ✅ SI
                     ❌ NO`).toUpperCase();
-                    if (confirmacion === "SI") {
-                        alert("✅ Operación realizada exitosamente");
-                        usuarios.splice(usuarios[i], 1);
-                        let confirmacion = prompt(`🔄 ¿Desea repetir la operación? (SI/NO)`).toUpperCase();
-                        if (confirmacion === "NO") {
-                            accion = "";
-                        } else if (confirmacion !== "SI") {
 
+                    if (confirmacion === "SI") {
+
+                        alert("✅ Operación realizada exitosamente");
+                        console.log(usuarios[i])
+                        usuarios.splice(i, 1);
+                        let confirmacion = prompt(`🔄 ¿Desea repetir la operación? (SI/NO)`).toUpperCase();
+
+                        if (confirmacion === "NO") {
+                            accion = ""
+
+                        } else if (confirmacion !== "SI") {
                             alert(`
-                                            🚫 Opción inválida
-                                            🙏 Por favor, ingresar una operación correcta`);
+                            🚫 Opción inválida
+                            🙏 Por favor, ingresar una operación correcta`)
                         }
+
                     } else {
                         alert("❌ La operación no se ha realizado");
 
@@ -252,14 +283,12 @@ while (accion.toUpperCase() !== "SALIR") {
                         }
                     }
                 }
-                // else {
-                //     alert(`😞 Usuario no encontrado`)
-                // }
             }
         }
+        if (usuarioEncontrado == false) {
+            alert(`😞 Usuario no encontrado`);
+        }      
     }
-
-
 
 
     else {
