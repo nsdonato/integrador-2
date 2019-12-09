@@ -262,13 +262,13 @@ while (accion.toUpperCase() !== "SALIR") {
 
                         if (confirmacion === "NO") {
                             accion = ""
-
+                            
                         } else if (confirmacion !== "SI") {
                             alert(`
                             🚫 Opción inválida
                             🙏 Por favor, ingresar una operación correcta`)
                         }
-
+                        break;
                     } else {
                         alert("❌ La operación no se ha realizado");
 
@@ -276,6 +276,7 @@ while (accion.toUpperCase() !== "SALIR") {
 
                         if (confirmacion === "NO") {
                             accion = "";
+                            break;
                         } else if (confirmacion !== "SI") {
                             alert(`
                             🚫 Opción inválida
@@ -283,6 +284,9 @@ while (accion.toUpperCase() !== "SALIR") {
                         }
                     }
                 }
+            }
+            if(usuarioEncontrado == true){
+                break;
             }
         }
         if (usuarioEncontrado == false) {
