@@ -281,7 +281,15 @@ while (accion.toUpperCase() !== "SALIR") {
                             alert(`
                             🚫 Opción inválida
                             🙏 Por favor, ingresar una operación correcta`);
+                        }  else if (confirmacion === "SI"){
+                            
+                            if(usuarios.length == 0){
+                                alert(`La operación no puede repetirse, todos los usuarios fueron eliminados`);
+                                accion = "";
+                                break;
+                            }
                         }
+                        
                     }
                 }
             }
