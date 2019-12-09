@@ -49,7 +49,7 @@ while (accion.toUpperCase() !== "SALIR") {
             let restoNombreMin = nombre.slice(1, nombre.length);
             let nombreFormateado = primerLetraMayus + restoNombreMin;
 
-            let datosNuevoUsuario = [id, nombreFormateado, Number(telefono), email.toLowerCase()];
+            let datosNuevoUsuario = [String(id), nombreFormateado, telefono, email.toLowerCase()];
 
             console.log(datosNuevoUsuario);
 
@@ -112,7 +112,7 @@ while (accion.toUpperCase() !== "SALIR") {
 ---------------------------------------------
 🆔 ID
 👤 NOMBRE
-☎️ ELEFONO
+☎️ TELEFONO
 📧 EMAIL`).toUpperCase();
 
         if (opcionDeBusqueda == "ID" || opcionDeBusqueda == "NOMBRE" || opcionDeBusqueda == "TELEFONO" || opcionDeBusqueda == "EMAIL") {
@@ -172,7 +172,7 @@ while (accion.toUpperCase() !== "SALIR") {
             for (let j = 0; j < usuarios[i].length; j++) {
 
                 if (usuarios[i][j] === idAMmodificar) {
-                    
+
                     usuarioEncontrado = true;
                     let nombreNuevo = prompt("👤 Ingrese el nuevo nombre del usuario");
                     let telefonoNuevo = prompt("☎️ Ingrese el nuevo teléfono del usuario");
@@ -229,7 +229,7 @@ while (accion.toUpperCase() !== "SALIR") {
         }
         if (usuarioEncontrado == false) {
             alert(`😞 Usuario no encontrado`);
-        }  
+        }
     }
 
     else if (accion.toUpperCase() === "ELIMINAR") {
@@ -287,7 +287,7 @@ while (accion.toUpperCase() !== "SALIR") {
         }
         if (usuarioEncontrado == false) {
             alert(`😞 Usuario no encontrado`);
-        }      
+        }
     }
 
 
