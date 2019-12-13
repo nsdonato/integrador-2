@@ -1,3 +1,13 @@
+// Observaciones generales
+
+// Codigo prolijo, claro, excelente indentacion, buenos nombres de variables. 
+// Recuerden siempre borrar los comentarios y los console log, estos son utiles para la fase de desarrollo
+// pero no deberia verlos un usuario (o un profe!) a menos que tengan un proposito especifico.
+
+// Les deje comentarios a lo largo del codigo, pero son detalles
+// Realmente este es un trabajo excelente. 
+// Felicitaciones!
+
 let usuarios = [
     ["0", "Carla", "1545628984", "carla@gmail.com"],
     ["1", "Pedro", "1545251245", "pedro@gmail.com"],
@@ -5,12 +15,23 @@ let usuarios = [
     ["3", "Ana", "15789456", "ana@gmail.com"]
 ];
 
+
+// Recuerden borrar los console.log (o table) antes de entregar un trabajo. 
+// No es buena practica dejarlos en el codigo. 
+
 console.table(usuarios); // Idem a console.log, la info se muestra como una tabla, queda más legible, nada mas.
 
 let nombre = "";
 let telefono = "";
 let email = "";
 let accion = "";
+
+// Noto que descubrieron que tenian que aumentar el indice cada vez que agregaron un usuario
+// Una vez que una variable se declara con un valor, queda ese valor declarado
+// En este caso, al momento de declarar esta variable, usuarios.length era 4
+// "id" siempre va a valer 4, aunque despues usuarios.length aumente, 
+// a menos que, como hicieron ustedes, actualice su valor mas adelante
+// Para evitar confusiones, yo la declararia vacia inicialmente. 
 let id = usuarios.length;
 
 while (accion.toUpperCase() !== "SALIR") {
@@ -28,6 +49,9 @@ while (accion.toUpperCase() !== "SALIR") {
 ➡️ [MODIFICAR] un usuario ✏️
 ➡️ [ELIMINAR] un usuario 🗑️
 ➡️ [SALIR] del programa 🚪`)
+
+// una manera mas breve de hacer esto mismo seria
+//      if (!accion) {
         if (accion != null && accion != "") {
             accion.toUpperCase();
         }
@@ -40,11 +64,19 @@ while (accion.toUpperCase() !== "SALIR") {
         email = prompt("📧 Ingrese el email del usuario");
 
         // Verifico que el usuario haya ingresado todos los datos, sino vamos a quedarnos con información inconsistente.
+
+        // manera mas breve:
+        // if (!nombre || !telefono || !email)
         if (nombre == "" || telefono == "" || email == "" || nombre == null || telefono == null || email == null) {
 
             alert(`⚠️ Uno o mas datos del nuevo usuario está/n vacios, por favor vuelva a ingresarlos`);
 
         } else {
+
+            // esta muy bien esto, para guardar los datos lindos
+            // pero si la persona escribe todo en mayusculas, no sirve
+            // le cambiaria esto:
+            // let restoNombreMin = nombre.slice(1, nombre.length).toLowerCase()
             let primerLetraMayus = nombre.charAt(0).toUpperCase();
             let restoNombreMin = nombre.slice(1, nombre.length);
             let nombreFormateado = primerLetraMayus + restoNombreMin;
@@ -122,6 +154,10 @@ while (accion.toUpperCase() !== "SALIR") {
             let restoNombreMin = ValorABuscar.slice(1, ValorABuscar.length);
             ValorABuscar = primerLetraMayus + restoNombreMin;
 
+
+            // el codigo aca esta muy bien, pero no hay alternativa en caso de que no se encuentre el valor buscado
+            // si por ejemplo pongo un ID que no existe, me pregunta si quiero repetir la operacion
+            // una respuesta que podria ser confusa 
             for (let i = 0; i < usuarios.length; i++) {
                 for (let j = 0; j < usuarios[i].length; j++) {
 
@@ -180,7 +216,7 @@ while (accion.toUpperCase() !== "SALIR") {
 
                     // Verifico que el usuario haya ingresado todos los datos nuevos para el usuario, sino vamos a quedarnos con información inconsistente.
                     if (nombreNuevo == "" || telefonoNuevo == "" || emailNuevo == "") {
-
+                            // excelente esta validacion 
                         alert(`⚠️ Uno o mas datos del nuevo usuario está/n vacios, por favor vuelva a ingresarlos`);
 
                     } else {
@@ -188,6 +224,8 @@ while (accion.toUpperCase() !== "SALIR") {
                         let restoNombreMin = nombreNuevo.slice(1, nombreNuevo.length);
                         let nombreNuevoFormateado = primerLetraMayus + restoNombreMin;
 
+                        // ojo aca, estan guardando telefono como Number, cuando en todos los demas casos
+                        // guardan telefono como un string. 
                         let datosUsuarioModificado = [idAMmodificar, nombreNuevoFormateado, Number(telefonoNuevo), emailNuevo.toLowerCase()];
 
                         console.log(datosUsuarioModificado);
@@ -239,6 +277,12 @@ while (accion.toUpperCase() !== "SALIR") {
 
         for (let i = 0; i < usuarios.length; i++) {
             for (let j = 0; j < usuarios[i].length; j++) {
+
+                // esto es un detalle, pero el prompt me pide id, sin embargo el codigo
+                // borra si encuentra un match en cualquier campo
+                // caso hipotetico: si alguien tiene de telefono el mismo numero que el id
+                // de un usuario, el codigo me mostraria para borrar al primero que encuentre
+                // entre ellos
 
                 if (idUsuarioAEliminar === usuarios[i][j]) {
 
